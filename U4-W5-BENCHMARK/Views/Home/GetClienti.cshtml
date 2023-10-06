@@ -1,0 +1,61 @@
+﻿@using U4_W5_BENCHMARK.Models
+
+@{
+    ViewBag.Title = "GetClienti";
+}
+
+<h2>Lista Clienti</h2>
+
+@if (TempData["Successo"] != null)
+{
+    <div class="alert alert-success p-4 my-4 text-center w-25 mx-auto">@TempData["Successo"]</div>
+}
+
+@if (TempData["Eliminazione"] != null)
+{
+    <div class="alert alert-success p-4 my-4 text-center w-25 mx-auto">@TempData["Eliminazione"]</div>
+}
+
+@if (TempData["Salvataggio"] != null)
+{
+    <div class="alert alert-success p-4 my-4 text-center w-25 mx-auto">@TempData["Salvataggio"]</div>
+}
+
+<div class="min-vh-100">
+    <div class="text-center mb-4">
+        <a href="~/Home/AddCliente" class="btn btn-primary w-25">Nuovo Cliente</a>
+    </div>
+    <table class="table table-bordered table-success">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>CF</th>
+                <th>Città</th>
+                <th>Provincia</th>
+                <th>Email</th>
+                <th>Telefono</th>
+                <th>Cellulare</th>
+                <th>Modifica</th>
+                <th>Elimina</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Cliente s in Model)
+            {
+                <tr>
+                    <td>@s.Nome</td>
+                    <td>@s.Cognome</td>
+                    <td>@s.CF</td>
+                    <td>@s.Citta</td>
+                    <td>@s.Provincia</td>
+                    <td>@s.Email</td>
+                    <td>@s.Telefono</td>
+                    <td>@s.Cellulare</td>
+                    <td><a href="~/Home/EditCliente/@s.IdCliente"><i class="fa-solid fa-wrench"></i></a></td>
+                    <td><a href="@Url.Action("DeleteCliente", "Home", new { id = s.IdCliente })"><i class="fa-solid fa-trash"></i></a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

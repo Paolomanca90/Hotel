@@ -1,0 +1,81 @@
+﻿@model U4_W5_BENCHMARK.Models.Servizio
+
+@{
+    ViewBag.Title = "EditServizio";
+    TempData["IdServizio"] = ViewContext.RouteData.Values["Id"];
+    List<string> tipologia = new List<string>
+    {
+        "Colazione in camera",
+        "Cibo e bevande dal minibar",
+        "Internet",
+        "Letto aggiuntivo",
+        "Culla",
+    };
+}
+
+<h2>Modifica Servizio</h2>
+
+@if (ViewBag.MessaggioErrore != null)
+{
+    <div class="alert alert-success w-25 mx-auto text-center m-4">@ViewBag.MessaggioErrore</div>
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Servizio</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ServizioAggiunto, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.ServizioAggiunto, new SelectList(tipologia), "- Seleziona Tipologia -", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ServizioAggiunto, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DataServizio, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DataServizio, new { htmlAttributes = new { @class = "form-control", type="date" } })
+            @Html.ValidationMessageFor(model => model.DataServizio, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Quantita, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Quantita, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Quantita, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PrezzoServizio, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PrezzoServizio, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.PrezzoServizio, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @Html.HiddenFor(model => model.IdPrenotazione)
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Modifica" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

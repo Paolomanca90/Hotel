@@ -1,0 +1,53 @@
+﻿@using U4_W5_BENCHMARK.Models
+
+@{
+    ViewBag.Title = "GetCamere";
+}
+
+<h2>Lista Camere</h2>
+
+@if (TempData["Successo"] != null)
+{
+    <div class="alert alert-success p-4 my-4 text-center w-25 mx-auto">@TempData["Successo"]</div>
+}
+
+@if (TempData["Eliminazione"] != null)
+{
+    <div class="alert alert-success p-4 my-4 text-center w-25 mx-auto">@TempData["Eliminazione"]</div>
+}
+
+@if (TempData["Salvataggio"] != null)
+{
+    <div class="alert alert-success p-4 my-4 text-center w-25 mx-auto">@TempData["Salvataggio"]</div>
+}
+
+<div class="min-vh-100">
+    <div class="text-center mb-4">
+        <a href="~/Home/AddCamera" class="btn btn-primary w-25">Nuova Camera</a>
+    </div>
+    <table class="table table-bordered table-success">
+        <thead>
+            <tr>
+                <th>Numero Camera</th>
+                <th>Descrizione</th>
+                <th>Doppia</th>
+                <th>Modifica</th>
+                <th>Elimina</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Camera s in Model)
+            {
+                <tr>
+                    <td>@s.NumeroCamera</td>
+                    <td>@s.Descrizione</td>
+                    <td>@s.Tipologia</td>
+                    <td><a href="~/Home/EditCamera/@s.IdCamera"><i class="fa-solid fa-wrench"></i></a></td>
+                    <td><a href="@Url.Action("DeleteCamera", "Home", new { id = s.IdCamera })"><i class="fa-solid fa-trash"></i></a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

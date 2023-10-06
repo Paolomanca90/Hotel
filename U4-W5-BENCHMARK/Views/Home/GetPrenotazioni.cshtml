@@ -1,0 +1,65 @@
+﻿@using U4_W5_BENCHMARK.Models
+
+@{
+    ViewBag.Title = "GetPrenotazioni";
+}
+
+<h2>Lista Prenotazioni</h2>
+
+@if (TempData["Successo"] != null)
+{
+    <div class="alert alert-success p-4 my-4 text-center w-25 mx-auto">@TempData["Successo"]</div>
+}
+
+@if (TempData["Eliminazione"] != null)
+{
+    <div class="alert alert-success p-4 my-4 text-center w-25 mx-auto">@TempData["Eliminazione"]</div>
+}
+
+@if (TempData["Salvataggio"] != null)
+{
+    <div class="alert alert-success p-4 my-4 text-center w-25 mx-auto">@TempData["Salvataggio"]</div>
+}
+
+<div class="min-vh-100">
+    <div class="text-center mb-4">
+        <a href="~/Home/AddPrenotazione" class="btn btn-primary w-25">Nuova Prenotazione</a>
+    </div>
+    <table class="table table-bordered table-success">
+        <thead>
+            <tr>
+                <th>Data Prenotazione</th>
+                <th>Inizio Soggiorno</th>
+                <th>Fine Soggiorno</th>
+                <th>Caparra</th>
+                <th>Tariffa</th>
+                <th>Cliente</th>
+                <th>Camera</th>
+                <th>Servizi</th>
+                <th>Modifica</th>
+                <th>Elimina</th>
+                <th>Checkout</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Prenotazione s in Model)
+            {
+                <tr>
+                    <td>@s.DataPrenotazione.ToShortDateString()</td>
+                    <td>@s.InizioSoggiorno.ToShortDateString()</td>
+                    <td>@s.FineSoggiorno.ToShortDateString()</td>
+                    <td>@s.Caparra.ToString("C")</td>
+                    <td>@s.Tariffa.ToString("C")</td>
+                    <td>@s.IdCliente</td>
+                    <td>@s.IdCamera</td>
+                    <td><a href="~/Home/GetServizi/@s.IdPrenotazione"><i class="fa fa-plus"></i></a></td>
+                    <td><a href="~/Home/EditPrenotazione/@s.IdPrenotazione"><i class="fa-solid fa-wrench"></i></a></td>
+                    <td><a href="@Url.Action("DeletePrenotazione", "Home", new { id = s.IdPrenotazione })"><i class="fa-solid fa-trash"></i></a></td>
+                    <td><a href="~/Home/Checkout/@s.IdPrenotazione"><i class="fa fa-arrow-right"></i></a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

@@ -1,0 +1,73 @@
+﻿@using U4_W5_BENCHMARK.Models
+
+@{
+    ViewBag.Title = "Checkout";
+    TempData["IdPrenotazione"] = ViewContext.RouteData.Values["Id"];
+    Prenotazione pren = ViewBag.Info as Prenotazione;
+    List<Servizio> lista = ViewBag.Servizi as List<Servizio>;
+    int totale = ViewBag.Totale;
+    int costoServizi = ViewBag.CostoServizi;
+}
+
+<h2>Checkout per la prenotazione n. @TempData["IdPrenotazione"]</h2>
+
+<div class="min-vh-100">
+    <table class="table table-bordered table-success">
+        <thead>
+            <tr>
+                <th>Camera</th>
+                <th>Inizio Soggiorno</th>
+                <th>Fine Soggiorno</th>
+                <th>Caparra</th>
+                <th>Tariffa</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@pren.IdCamera</td>
+                <td>@pren.InizioSoggiorno.ToShortDateString()</td>
+                <td>@pren.FineSoggiorno.ToShortDateString()</td>
+                <td>@pren.Caparra.ToString("C")</td>
+                <td>@pren.Tariffa.ToString("C")</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-bordered table-success">
+        <thead>
+            <tr>
+                <th>Servizio</th>
+                <th>Quantità</th>
+                <th>Prezzo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Servizio s in lista)
+            {
+                <tr>
+                    <td>@s.ServizioAggiunto</td>
+                    <td>@s.Quantita</td>
+                    <td>@s.PrezzoServizio.ToString("C")</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    <table class="table table-bordered table-success">
+        <thead>
+            <tr>
+                <th>Costo Camera</th>
+                <th>Caparra</th>
+                <th>Costo Servizi</th>
+                <th>Totale da saldare</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@pren.Tariffa.ToString("C")</td>
+                <td>@pren.Caparra.ToString("C")</td>
+                <td>@costoServizi.ToString("C")</td>
+                <td>@totale.ToString("C")</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
