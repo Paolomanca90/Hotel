@@ -9,11 +9,11 @@
     int costoServizi = ViewBag.CostoServizi;
 }
 
-<h2>Checkout per la prenotazione n. @TempData["IdPrenotazione"]</h2>
+<h2 class="m-0 text-danger text-decoration-underline text-center pb-3">Checkout per la prenotazione n. @TempData["IdPrenotazione"]</h2>
 
-<div class="min-vh-100">
-    <table class="table table-bordered table-success">
-        <thead>
+<div class="min-vh-100 p-4" style="background-image: url(https://img.ilgcdn.com/sites/default/files/styles/xl/public/foto/2021/03/05/1614950257-shining.jpg?_=1614950257)">
+    <table class="table table-bordered">
+        <thead class="text-bg-danger">
             <tr>
                 <th>Camera</th>
                 <th>Inizio Soggiorno</th>
@@ -22,7 +22,7 @@
                 <th>Tariffa</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="text-bg-secondary">
             <tr>
                 <td>@pren.IdCamera</td>
                 <td>@pren.InizioSoggiorno.ToShortDateString()</td>
@@ -32,15 +32,15 @@
             </tr>
         </tbody>
     </table>
-    <table class="table table-bordered table-success">
-        <thead>
+    <table class="table table-bordered">
+        <thead class="text-bg-danger">
             <tr>
                 <th>Servizio</th>
                 <th>Quantità</th>
                 <th>Prezzo</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="text-bg-secondary">
             @foreach (Servizio s in lista)
             {
                 <tr>
@@ -52,8 +52,8 @@
             }
         </tbody>
     </table>
-    <table class="table table-bordered table-success">
-        <thead>
+    <table class="table table-bordered">
+        <thead class="text-bg-danger">
             <tr>
                 <th>Costo Camera</th>
                 <th>Caparra</th>
@@ -61,7 +61,7 @@
                 <th>Totale da saldare</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="text-bg-secondary">
             <tr>
                 <td>@pren.Tariffa.ToString("C")</td>
                 <td>@pren.Caparra.ToString("C")</td>

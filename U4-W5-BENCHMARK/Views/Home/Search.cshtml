@@ -3,18 +3,16 @@
     ViewBag.Title = "Search";
 }
 
-<h2>Libro mastro delle prenotazioni</h2>
-<div>
+<h2 class="m-0 text-danger text-decoration-underline text-center pb-3">Libro mastro delle prenotazioni</h2>
+<div class="min-vh-100 p-4" style="background-image: url(https://ca-times.brightspotcdn.com/dims4/default/3511437/2147483647/strip/true/crop/5000x3266+0+0/resize/2000x1306!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F1f%2F2d%2F5445aa9d4394b2f450232b6c0b28%2F154ascrapbookkubricktheshiningce66983.jpg); background-size:cover">
     <div>
-        @Html.Label("Codice Fiscale")
-        @Html.TextBox("CF", null, new { id = "CF" })
-    </div>
-
-    <div>
-        <button id="cerca" class="btn btn-primary">Cerca</button>
-    </div>
-    <table id="tablePren" class="table table-bordered table-success" style="display:none">
-        <thead>
+        <div class="d-flex p-4 rounded-4 align-items-center mb-4 justify-content-evenly" style="background-color: rgb(239, 86, 81, 0.7)">
+            @Html.Label("Inserisci il codice fiscale", new { @class = "control-label w-25 text-light m-0 fs-5 fw-bold" })
+            @Html.TextBox("CF", null, new { id = "CF", @class = "form-control" })
+            <button id="cerca" class="btn btn-secondary px-4 w-25 ms-5">Cerca</button>
+        </div>
+    <table id="tablePren" class="table table-bordered" style="display:none">
+        <thead class="text-bg-danger">
             <tr>
                 <th>Cliente</th>
                 <th>Camera</th>
@@ -24,28 +22,31 @@
                 <th>Tariffa</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="text-bg-secondary">
         </tbody>
     </table>
 </div>
 
 <div>
-    <button id="pensioneCompleta">Prenotazioni in pensione completa</button>
-    <table id="tablePren2" class="table table-bordered table-success" style="display:none">
-        <thead>
-            <tr>
-                <th>Cliente</th>
-                <th>Camera</th>
-                <th>Inizio Soggiorno</th>
-                <th>Fine Soggiorno</th>
-                <th>Caparra</th>
-                <th>Tariffa</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
+    <div class="text-center mb-4">
+        <button id="pensioneCompleta" class="btn btn-danger w-50 rounded-3 fs-5 fw-bold px-4">Prenotazioni in pensione completa</button>
+    </div>
+        <table id="tablePren2" class="table table-bordered" style="display:none">
+            <thead class="text-bg-danger">
+                <tr>
+                    <th>Cliente</th>
+                    <th>Camera</th>
+                    <th>Inizio Soggiorno</th>
+                    <th>Fine Soggiorno</th>
+                    <th>Caparra</th>
+                    <th>Tariffa</th>
+                </tr>
+            </thead>
+            <tbody class="text-bg-secondary">
+            </tbody>
     </table>
 </div>
+    </div>
 
 @section scripts{
     <script src="~/Scripts/JavaScriptCustom.js"></script>
