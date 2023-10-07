@@ -13,23 +13,6 @@ namespace U4_W5_BENCHMARK.Models
         public static string connectionString = ConfigurationManager.ConnectionStrings["ConnectionDB"].ConnectionString.ToString();
         public static SqlConnection conn = new SqlConnection(connectionString);
 
-        public static Utente GetUtente(Utente u)
-        {
-            SqlCommand sqlCommand = new SqlCommand("Select * FROM Utenti WHERE Username=@Username And Password=@Password", conn);
-            sqlCommand.Parameters.AddWithValue("Username", u.Username);
-            sqlCommand.Parameters.AddWithValue("Password", u.Password);
-            conn.Open();
-            SqlDataReader reader = sqlCommand.ExecuteReader();
-            if (reader.HasRows)
-            {
-                FormsAuthentication.SetAuthCookie(u.Username, false);
-                conn.Close();
-                return u;
-            }
-            conn.Close();
-            return null;
-        }
-
         public static void AddCliente(Cliente c)
         {
             SqlCommand cmd = new SqlCommand("Insert INTO Clienti Values(@Nome, @Cognome, @CF, @Citta, @Provincia, @Email, @Telefono, @Cellulare)", conn);
