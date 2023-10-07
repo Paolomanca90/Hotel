@@ -376,5 +376,23 @@ namespace U4_W5_BENCHMARK.Controllers
             ViewBag.Totale = selected.Tariffa - selected.Caparra + totaleServizi;
             return View();
         }
+
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult getPrenotazioneByCF(string cf)
+        {
+            List<Prenotazione> lista = DB.getPrenotazioneByCF(cf);
+            return Json(lista);
+        }
+
+        public ActionResult getPrenotazionePensioneCompleta()
+        {
+            List<Prenotazione> lista = DB.getPrenotazionePensioneCompleta();
+            return Json(lista, JsonRequestBehavior.AllowGet);
+        }
     }
 }

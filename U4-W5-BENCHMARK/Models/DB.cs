@@ -209,6 +209,7 @@ namespace U4_W5_BENCHMARK.Models
         {
             conn.Open();
             SqlCommand cmd = new SqlCommand("UPDATE Prenotazioni SET DataPrenotazione = @DataPrenotazione, Anno = @Anno, InizioSoggiorno = @InizioSoggiorno, FineSoggiorno = @FineSoggiorno, Caparra = @Caparra, Tariffa = @Tariffa, TipologiaSoggiorno = @TipologiaSoggiorno, IdCliente = @IdCliente, IdCamera = @IdCamera where IdPrenotazione = @IdPrenotazione", conn);
+            cmd.Parameters.AddWithValue("IdPrenotazione", p.IdPrenotazione);
             cmd.Parameters.AddWithValue("DataPrenotazione", p.DataPrenotazione);
             cmd.Parameters.AddWithValue("Anno", p.Anno);
             cmd.Parameters.AddWithValue("InizioSoggiorno", p.InizioSoggiorno);
@@ -304,6 +305,61 @@ namespace U4_W5_BENCHMARK.Models
             cmd.Parameters.AddWithValue("IdPrenotazione", p.IdPrenotazione);
             cmd.ExecuteNonQuery();
             conn.Close();
+        }
+
+        public static List<Prenotazione> getPrenotazioneByCF(string cf)
+        {
+            List<Prenotazione> lista = new List<Prenotazione>();
+            SqlCommand cmd = new SqlCommand("select *, Nome, Cognome, NumeroCamera from Prenotazioni Inner JOIN Clienti ON Prenotazioni.IdCliente = Clienti.IdCliente Inner JOIN Camere ON Prenotazioni.IdCamera = Camere.IdCamera where Prenotazioni.IdCliente=(select IdCliente from Clienti where CF=@CF)", conn);
+            cmd.Parameters.AddWithValue("CF", cf);
+            SqlDataReader sqlDataReader;
+            conn.Open();
+            sqlDataReader = cmd.ExecuteReader();
+
+            while (sqlDataReader.Read())
+            {
+                Prenotazione utente = new Prenotazione();
+                utente.IdPrenotazione = Convert.ToInt32(sqlDataReader["IdPrenotazione"]);
+                utente.DataPrenotazione = Convert.ToDateTime(sqlDataReader["DataPrenotazione"]);
+                utente.Anno = Convert.ToInt32(sqlDataReader["Anno"]);
+                utente.InizioSoggiorno = Convert.ToDateTime(sqlDataReader["InizioSoggiorno"]);
+                utente.FineSoggiorno = Convert.ToDateTime(sqlDataReader["FineSoggiorno"]);
+                utente.Caparra = Convert.ToInt32(sqlDataReader["Caparra"]);
+                utente.Tariffa = Convert.ToInt32(sqlDataReader["Tariffa"]);
+                utente.TipologiaSoggiorno = sqlDataReader["TipologiaSoggiorno"].ToString();
+                utente.IdCliente = $"{sqlDataReader["Cognome"].ToString()}, {sqlDataReader["Nome"].ToString()}";
+                utente.IdCamera = sqlDataReader["NumeroCamera"].ToString();
+                lista.Add(utente);
+            }
+            conn.Close();
+            return lista;
+        }
+
+        public static List<Prenotazione> getPrenotazionePensioneCompleta()
+        {
+            List<Prenotazione> lista = new List<Prenotazione>();
+            SqlCommand cmd = new SqlCommand("select *, Nome, Cognome, NumeroCamera from Prenotazioni Inner JOIN Clienti ON Prenotazioni.IdCliente = Clienti.IdCliente Inner JOIN Camere ON Prenotazioni.IdCamera = Camere.IdCamera where TipologiaSoggiorno = 'Pensione completa'", conn);
+            SqlDataReader sqlDataReader;
+            conn.Open();
+            sqlDataReader = cmd.ExecuteReader();
+
+            while (sqlDataReader.Read())
+            {
+                Prenotazione utente = new Prenotazione();
+                utente.IdPrenotazione = Convert.ToInt32(sqlDataReader["IdPrenotazione"]);
+                utente.DataPrenotazione = Convert.ToDateTime(sqlDataReader["DataPrenotazione"]);
+                utente.Anno = Convert.ToInt32(sqlDataReader["Anno"]);
+                utente.InizioSoggiorno = Convert.ToDateTime(sqlDataReader["InizioSoggiorno"]);
+                utente.FineSoggiorno = Convert.ToDateTime(sqlDataReader["FineSoggiorno"]);
+                utente.Caparra = Convert.ToInt32(sqlDataReader["Caparra"]);
+                utente.Tariffa = Convert.ToInt32(sqlDataReader["Tariffa"]);
+                utente.TipologiaSoggiorno = sqlDataReader["TipologiaSoggiorno"].ToString();
+                utente.IdCliente = $"{sqlDataReader["Cognome"].ToString()}, {sqlDataReader["Nome"].ToString()}";
+                utente.IdCamera = sqlDataReader["NumeroCamera"].ToString();
+                lista.Add(utente);
+            }
+            conn.Close();
+            return lista;
         }
     }
 }

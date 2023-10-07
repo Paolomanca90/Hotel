@@ -5,7 +5,11 @@
     TempData["IdPrenotazione"] = ViewContext.RouteData.Values["Id"];
 }
 
-<h2>Lista Servizi per la prenotazione n. @TempData["IdPrenotazione"]</h2>
+<div class="d-flex justify-content-between mb-4">
+    <h2 class="m-0 text-danger text-decoration-underline">Lista Servizi per la prenotazione n. @TempData["IdPrenotazione"]</h2>
+    <a href="~/Home/AddServizio/@TempData["IdPrenotazione"]" class="btn btn-danger w-25 rounded-pill">Nuovo Servizio</a>
+</div>
+
 
 @if (TempData["Successo"] != null)
 {
@@ -22,12 +26,9 @@
     <div class="alert alert-success p-4 my-4 text-center w-25 mx-auto">@TempData["Salvataggio"]</div>
 }
 
-<div class="min-vh-100">
-    <div class="text-center mb-4">
-        <a href="~/Home/AddServizio/@TempData["IdPrenotazione"]" class="btn btn-primary w-25">Nuovo Servizio</a>
-    </div>
-    <table class="table table-bordered table-success">
-        <thead>
+<div class="min-vh-100 p-4" style="background-image: url(https://ca-times.brightspotcdn.com/dims4/default/c48e52a/2147483647/strip/true/crop/5000x3333+0+82/resize/2000x1333!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F46%2F6c%2F9c3503b243f084f1156bb55bf750%2F196ascrapbookkubricktheshiningce66983.jpg); background-size:cover">
+    <table class="table table-bordered">
+        <thead class="text-bg-danger">
             <tr>
                 <th>Servizio Aggiunto</th>
                 <th>Data Servizio</th>
@@ -37,7 +38,7 @@
                 <th>Elimina</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="text-bg-secondary">
             @foreach (Servizio s in Model)
             {
                 <tr>
@@ -45,8 +46,8 @@
                     <td>@s.DataServizio.ToShortDateString()</td>
                     <td>@s.Quantita</td>
                     <td>@s.PrezzoServizio.ToString("C")</td>
-                    <td><a href="~/Home/EditServizio/@s.IdServizio"><i class="fa-solid fa-wrench"></i></a></td>
-                    <td><a href="@Url.Action("DeleteServizio", "Home", new { id = s.IdServizio })"><i class="fa-solid fa-trash"></i></a></td>
+                    <td><a href="~/Home/EditServizio/@s.IdServizio"><i class="fa-solid fa-wrench text-light"></i></a></td>
+                    <td><a href="@Url.Action("DeleteServizio", "Home", new { id = s.IdServizio })"><i class="fa-solid fa-trash text-light"></i></a></td>
                 </tr>
             }
         </tbody>

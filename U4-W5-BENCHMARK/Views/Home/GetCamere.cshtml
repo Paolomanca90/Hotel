@@ -4,7 +4,10 @@
     ViewBag.Title = "GetCamere";
 }
 
-<h2>Lista Camere</h2>
+<div class="d-flex justify-content-between mb-4">
+    <h2 class="m-0 text-danger text-decoration-underline">Camere dell'hotel</h2>
+    <a href="~/Home/AddCamera" class="btn btn-danger w-25 rounded-pill">Nuova Camera</a>
+</div>
 
 @if (TempData["Successo"] != null)
 {
@@ -21,12 +24,9 @@
     <div class="alert alert-success p-4 my-4 text-center w-25 mx-auto">@TempData["Salvataggio"]</div>
 }
 
-<div class="min-vh-100">
-    <div class="text-center mb-4">
-        <a href="~/Home/AddCamera" class="btn btn-primary w-25">Nuova Camera</a>
-    </div>
-    <table class="table table-bordered table-success">
-        <thead>
+<div class="min-vh-100 p-4" style="background-image: url(https://dutchmuseumgiftshop.nl/wp-content/uploads/2020/06/shining-outlook-hotel.jpg)">
+    <table class="table table-bordered">
+        <thead class="text-bg-danger">
             <tr>
                 <th>Numero Camera</th>
                 <th>Descrizione</th>
@@ -35,15 +35,15 @@
                 <th>Elimina</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="text-bg-secondary">
             @foreach (Camera s in Model)
             {
                 <tr>
                     <td>@s.NumeroCamera</td>
                     <td>@s.Descrizione</td>
                     <td>@s.Tipologia</td>
-                    <td><a href="~/Home/EditCamera/@s.IdCamera"><i class="fa-solid fa-wrench"></i></a></td>
-                    <td><a href="@Url.Action("DeleteCamera", "Home", new { id = s.IdCamera })"><i class="fa-solid fa-trash"></i></a></td>
+                    <td><a href="~/Home/EditCamera/@s.IdCamera"><i class="fa-solid fa-wrench text-light"></i></a></td>
+                    <td><a href="@Url.Action("DeleteCamera", "Home", new { id = s.IdCamera })"><i class="fa-solid fa-trash text-light"></i></a></td>
                 </tr>
             }
         </tbody>

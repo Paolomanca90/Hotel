@@ -4,7 +4,10 @@
     ViewBag.Title = "GetPrenotazioni";
 }
 
-<h2>Lista Prenotazioni</h2>
+<div class="d-flex justify-content-between mb-4">
+    <h2 class="m-0 text-danger text-decoration-underline">Lista prenotazioni</h2>
+    <a href="~/Home/AddPrenotazione" class="btn btn-danger w-25 rounded-pill">Nuova Prenotazione</a>
+</div>
 
 @if (TempData["Successo"] != null)
 {
@@ -21,12 +24,9 @@
     <div class="alert alert-success p-4 my-4 text-center w-25 mx-auto">@TempData["Salvataggio"]</div>
 }
 
-<div class="min-vh-100">
-    <div class="text-center mb-4">
-        <a href="~/Home/AddPrenotazione" class="btn btn-primary w-25">Nuova Prenotazione</a>
-    </div>
-    <table class="table table-bordered table-success">
-        <thead>
+<div class="min-vh-100 p-4" style="background-image: url(https://static1.srcdn.com/wordpress/wp-content/uploads/2023/01/the-shining-jack-and-danny.jpg)">
+    <table class="table table-bordered">
+        <thead class="text-bg-danger">
             <tr>
                 <th>Data Prenotazione</th>
                 <th>Inizio Soggiorno</th>
@@ -41,7 +41,7 @@
                 <th>Checkout</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="text-bg-secondary">
             @foreach (Prenotazione s in Model)
             {
                 <tr>
@@ -52,10 +52,10 @@
                     <td>@s.Tariffa.ToString("C")</td>
                     <td>@s.IdCliente</td>
                     <td>@s.IdCamera</td>
-                    <td><a href="~/Home/GetServizi/@s.IdPrenotazione"><i class="fa fa-plus"></i></a></td>
-                    <td><a href="~/Home/EditPrenotazione/@s.IdPrenotazione"><i class="fa-solid fa-wrench"></i></a></td>
-                    <td><a href="@Url.Action("DeletePrenotazione", "Home", new { id = s.IdPrenotazione })"><i class="fa-solid fa-trash"></i></a></td>
-                    <td><a href="~/Home/Checkout/@s.IdPrenotazione"><i class="fa fa-arrow-right"></i></a></td>
+                    <td><a href="~/Home/GetServizi/@s.IdPrenotazione"><i class="fa fa-plus text-light"></i></a></td>
+                    <td><a href="~/Home/EditPrenotazione/@s.IdPrenotazione"><i class="fa-solid fa-wrench text-light"></i></a></td>
+                    <td><a href="@Url.Action("DeletePrenotazione", "Home", new { id = s.IdPrenotazione })"><i class="fa-solid fa-trash text-light"></i></a></td>
+                    <td><a href="~/Home/Checkout/@s.IdPrenotazione"><i class="fa fa-arrow-right text-light"></i></a></td>
                 </tr>
             }
         </tbody>

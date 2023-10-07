@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Libro mastro delle prenotazioni</h2>
+<div>
+    <div>
+        @Html.Label("Codice Fiscale")
+        @Html.TextBox("CF", null, new { id = "CF" })
+    </div>
+
+    <div>
+        <button id="cerca" class="btn btn-primary">Cerca</button>
+    </div>
+    <table id="tablePren" class="table table-bordered table-success" style="display:none">
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Camera</th>
+                <th>Inizio Soggiorno</th>
+                <th>Fine Soggiorno</th>
+                <th>Caparra</th>
+                <th>Tariffa</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <button id="pensioneCompleta">Prenotazioni in pensione completa</button>
+    <table id="tablePren2" class="table table-bordered table-success" style="display:none">
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Camera</th>
+                <th>Inizio Soggiorno</th>
+                <th>Fine Soggiorno</th>
+                <th>Caparra</th>
+                <th>Tariffa</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/JavaScriptCustom.js"></script>
+}

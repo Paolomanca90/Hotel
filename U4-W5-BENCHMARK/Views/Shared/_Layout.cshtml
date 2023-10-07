@@ -4,42 +4,70 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Applicazione ASP.NET</title>
+    <title>Overlook Hotel</title>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css'>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-            <div class="container">
-                @Html.ActionLink("Nome dell'applicazione", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Attiva/Disattiva spostamento" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                    @if (User.Identity.Name != "")
-                    {
-                        <ul class="navbar-nav flex-grow-1">
-                            <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                            <li>@Html.ActionLink("Clienti", "GetClienti", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                            <li>@Html.ActionLink("Camere", "GetCamere", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                            <li>@Html.ActionLink("Prenotazioni", "GetPrenotazioni", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        </ul>
-                    }
-                    </div>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark p-0" style="background-color: #8f1c24">
+        <div class="container">
+            <a href="@Url.Action("Index", "Home", new { area = "" })" class="navbar-brand p-0" style="width:20%">
+                <img src="~/Content/Img/logo.jpeg" alt="logo" class='w-100' />
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Attiva/Disattiva spostamento" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                @if (User.Identity.Name != "")
+                {
+                    <ul class="navbar-nav flex-grow-1 justify-content-end">
+                        <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link fs-5" })</li>
+                        <li>@Html.ActionLink("Clienti", "GetClienti", "Home", new { area = "" }, new { @class = "nav-link fs-5" })</li>
+                        <li>@Html.ActionLink("Camere", "GetCamere", "Home", new { area = "" }, new { @class = "nav-link fs-5" })</li>
+                        <li>@Html.ActionLink("Prenotazioni", "GetPrenotazioni", "Home", new { area = "" }, new { @class = "nav-link fs-5" })</li>
+                        <li>@Html.ActionLink("Registri", "Search", "Home", new { area = "" }, new { @class = "nav-link fs-5" })</li>
+                    </ul>
+                }
             </div>
-        </nav>
-    <div class="container body-content">
+        </div>
+    </nav>
+    <div class="container-fluid body-content m-0 px-5 py-3 bg-dark">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Applicazione ASP.NET</p>
-        </footer>
     </div>
+    <footer>
+        <div class="container-fluid text-light pt-2" style="background-color: #8f1c24">
+            <div class="row justify-content-center w-75 mx-auto">
+                <div class="col-md-4">
+                    <h5>Contatti</h5>
+                    <p class="m-0 "><ins>Indirizzo:</ins> Estes Park, Gorizia</p>
+                    <p class="m-0 "><ins>Email:</ins> info@overlookhotel.com</p>
+                    <p class="m-0 "><ins>Telefono:</ins> +39 0123 456 789</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Link Utili</h5>
+                    <ul>
+                        <li><a href="https://www.mews.com/en/blog/overlook-hotel" class="text-light text-decoration-none">Struttura</a></li>
+                        <li><a href="https://it.wikipedia.org/wiki/Overlook_Hotel" class="text-light text-decoration-none">Scopri di più</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Social Media</h5>
+                    <ul class="social-icons d-flex list-unstyled gap-4">
+                        <li><a href="https://www.linkedin.com/in/paolo-manca-developer"><i class="fa-brands fa-linkedin text-light"></i></a></li>
+                        <li><a href="https://github.com/Paolomanca90"><i class="fa-brands fa-github text-light"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row justify-content-center pb-3">&copy; @DateTime.Now.Year - Overlook Hotel</div>
+        </div>
+    </footer>
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
 </body>
 </html>
